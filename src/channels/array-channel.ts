@@ -4,12 +4,7 @@
  * @packageDocumentation
  */
 
-import type {
-    ArrayNotificationRecord,
-    Notifiable,
-    Notification,
-    NotificationChannel,
-} from "../types";
+import type { ArrayNotificationRecord, Notifiable, Notification, NotificationChannel } from "../types";
 
 /**
  * In-memory channel (Laravel array / testing accumulator).
@@ -18,10 +13,7 @@ export class ArrayChannel implements NotificationChannel {
     public readonly notifications: ArrayNotificationRecord[] = [];
 
     public async send(notifiable: Notifiable, notification: Notification): Promise<void> {
-        const data =
-            typeof notification.toArray === "function"
-                ? notification.toArray(notifiable)
-                : {};
+        const data = typeof notification.toArray === "function" ? notification.toArray(notifiable) : {};
         this.notifications.push({ notifiable, notification, data });
     }
 

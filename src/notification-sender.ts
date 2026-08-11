@@ -32,17 +32,12 @@ export interface NotificationSenderOptions {
  * Dispatches notifications to channels returned by `via()`.
  */
 export class NotificationSender {
-    public constructor(
-        private readonly channels: Partial<Record<NotificationChannelName, NotificationChannel>>,
-    ) {}
+    public constructor(private readonly channels: Partial<Record<NotificationChannelName, NotificationChannel>>) {}
 
     /**
      * Send sync (0.1.0 — no queue coupling).
      */
-    public async send(
-        notifiables: Notifiable | Notifiable[],
-        notification: Notification,
-    ): Promise<void> {
+    public async send(notifiables: Notifiable | Notifiable[], notification: Notification): Promise<void> {
         await this.sendNow(notifiables, notification);
     }
 
@@ -92,9 +87,7 @@ export class NotificationSender {
 /**
  * Build a sender with `array` always and `mail` when a sender is provided.
  */
-export function createNotificationSender(
-    options: NotificationSenderOptions = {},
-): NotificationSender {
+export function createNotificationSender(options: NotificationSenderOptions = {}): NotificationSender {
     if (options.channels !== undefined) {
         return new NotificationSender(options.channels);
     }
