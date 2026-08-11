@@ -4,12 +4,7 @@
  * @packageDocumentation
  */
 
-import type {
-    MailChannelSender,
-    Notifiable,
-    Notification,
-    NotificationChannel,
-} from "../types";
+import type { MailChannelSender, Notifiable, Notification, NotificationChannel } from "../types";
 import { resolveMailRoute } from "./resolve-mail-route";
 
 /**

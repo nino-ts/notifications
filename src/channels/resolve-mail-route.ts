@@ -9,10 +9,7 @@ import type { Notifiable, Notification } from "../types";
 /**
  * Prefer `routeNotificationForMail`, then `email`.
  */
-export function resolveMailRoute(
-    notifiable: Notifiable,
-    notification: Notification,
-): string | string[] | undefined {
+export function resolveMailRoute(notifiable: Notifiable, notification: Notification): string | string[] | undefined {
     if (typeof notifiable.routeNotificationForMail === "function") {
         return notifiable.routeNotificationForMail(notification);
     }

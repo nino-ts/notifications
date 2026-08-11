@@ -33,7 +33,7 @@ class WelcomeNotification implements Notification {
 }
 
 class ArrayOnlyNotification implements Notification {
-    public via(_notifiable: Notifiable): ("array")[] {
+    public via(_notifiable: Notifiable): "array"[] {
         return ["array"];
     }
 
@@ -118,9 +118,7 @@ describe("MailChannel", () => {
         const channel = new MailChannel({
             async send() {},
         });
-        await expect(
-            channel.send({ email: "x@y.z" }, new ArrayOnlyNotification()),
-        ).rejects.toThrow(/toMail/);
+        await expect(channel.send({ email: "x@y.z" }, new ArrayOnlyNotification())).rejects.toThrow(/toMail/);
     });
 });
 
@@ -180,17 +178,12 @@ describe("NotificationSender", () => {
         const sender = new NotificationSender({
             array: new ArrayChannel(),
         });
-        await expect(
-            sender.send({ email: "x@y.z" }, new WelcomeNotification()),
-        ).rejects.toThrow(/mail/);
+        await expect(sender.send({ email: "x@y.z" }, new WelcomeNotification())).rejects.toThrow(/mail/);
     });
 
     test("send accepts multiple notifiables", async () => {
         const sender = createNotificationSender({});
-        await sender.send(
-            [{ email: "a@test" }, { email: "b@test" }],
-            new ArrayOnlyNotification(),
-        );
+        await sender.send([{ email: "a@test" }, { email: "b@test" }], new ArrayOnlyNotification());
         expect(sender.arrayChannel()?.notifications).toHaveLength(2);
     });
 });
